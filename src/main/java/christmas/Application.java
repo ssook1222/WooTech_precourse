@@ -48,7 +48,8 @@ public class Application {
             orderedItems[i] = menuAndQuantity[0];
             quantities[i] = Integer.parseInt(menuAndQuantity[1]);
         }
-        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
+        System.out.println("12월" + " " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        System.out.println("");
 
         if (isDateValid && isMenuValid) {
             // 2. 주문 정보 출력
@@ -89,11 +90,11 @@ public class Application {
                 System.out.println(freeItem + '\n');
             }
             
-            System.out.println("<혜택 내용>");
+            System.out.println("<혜택 내역>");
             System.out.println(benefitInfo + '\n');
 
             if (discount > 0) {
-                System.out.println("<총할인 금액>");
+                System.out.println("<총혜택 금액>");
                 System.out.println("-" + formatCurrency(discount) + "원\n");
             }
 
