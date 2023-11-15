@@ -19,16 +19,26 @@ public class DateValidator {
         // 메뉴와 수량을 확인하는 정규표현식
         String menuFormatRegex = "[\\p{L}\\s]+-\\d+";
         
-        Set<String> validMenuItems = DiscountCalculator.getValidMenuItems();
+        // Set<String> validMenuItems = DiscountCalculator.getValidMenuItems();
     
         for (String item : orderedItems) {
             if (!item.matches(menuFormatRegex)) {
                 System.out.println("[ERROR] 주문한 메뉴의 형식이 올바르지 않습니다. (예: 메뉴-수량)");
                 return false; // 형식에 맞지 않는 경우
             }
-            if (!validMenuItems.contains(getMenuItemName(item))) {
+
+            String menuItemName = getMenuItemName(item);
+            Set<String> validAppetizerItems = DiscountCalculator.getAppetizerMenuItems();
+            Set<String> validMainMenuItems = DiscountCalculator.getMainMenuItems();
+            Set<String> validDessertMenuItems = DiscountCalculator.getDessertMenuItems();
+            Set<String> validBeverageMenuItems = DiscountCalculator.getBeverageMenuItems();
+
+            if (!validAppetizerItems.contains(menuItemName) &&
+                !validMainMenuItems.contains(menuItemName) &&
+                !validDessertMenuItems.contains(menuItemName) &&
+                !validBeverageMenuItems.contains(menuItemName)) {
                 System.out.println("[ERROR] 주문한 메뉴가 유효하지 않습니다.");
-                return false; // 메뉴판에 없는 메뉴를 주문해서 유효하지 않는 경우
+                return false; // 메뉴판에 없는 메뉴를 주문해서 유효하지 않은 경우
             }
             if (!uniqueItems.add(item)) {
                 System.out.println("[ERROR] 중복된 메뉴가 있습니다.");

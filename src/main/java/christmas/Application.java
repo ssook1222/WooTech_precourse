@@ -1,7 +1,9 @@
 package christmas;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -48,17 +50,25 @@ public class Application {
 
             // 3. 할인 및 혜택 계산
             double totalPrice = DiscountCalculator.calculateTotalPrice(orderedItems, quantities);
-            double discount = DiscountCalculator.calculateDiscount(totalPrice, orderDate);
+            double discount = DiscountCalculator.calculateDiscount(totalPrice, orderDate,
+                    new HashSet<>(Arrays.asList(orderedItems)));
             double finalPrice = DiscountCalculator.calculateFinalPrice(totalPrice, discount);
 
             // 4. 증정 메뉴 확인
             String freeItem = FreeItemChecker.checkFreeItem(totalPrice);
 
             // 5. 혜택 내역 확인
-            String benefitInfo = BenefitChecker.checkBenefits(totalPrice, orderDate);
+            String benefitInfo = BenefitChecker.checkBenefits(totalPrice, orderDate,
+                    new HashSet<>(Arrays.asList(orderedItems)));
 
             // 6. 이벤트 배지 확인
             double totalBenefits = totalPrice - finalPrice;
+
+            // 혜택 내역에 "증정 이벤트: -25,000원"이 있으면 totalBenefits에 25,000원을 추가
+            if (benefitInfo.contains("증정 이벤트: -25,000원")) {
+                finalPrice += 25000;
+            }
+
             String eventBadge = EventBadgeChecker.checkEventBadge(totalBenefits);
 
             // 7. 결과 출력
@@ -67,7 +77,7 @@ public class Application {
 
             if (!freeItem.isEmpty()) {
                 System.out.println("<증정 메뉴>");
-                System.out.println(freeItem + '\n');
+                System.out.println(freeItem + " 1개" + '\n');
             }
 
             System.out.println("<혜택 내용>");
