@@ -83,11 +83,14 @@ public class Application {
             System.out.println("<할인 전 총주문 금액>");
             System.out.println(formatCurrency(totalPrice) + "원\n");
 
-            if (!freeItem.isEmpty()) {
+            if (!freeItem.isEmpty() && freeItem.equals("샴페인")) {
                 System.out.println("<증정 메뉴>");
                 System.out.println(freeItem + " 1개" + '\n');
+            } else if (!freeItem.isEmpty() && !freeItem.equals("샴페인")) {
+                System.out.println("<증정 메뉴>");
+                System.out.println(freeItem + '\n');
             }
-
+            
             System.out.println("<혜택 내용>");
             System.out.println(benefitInfo + '\n');
 
