@@ -3,8 +3,9 @@ package christmas;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Scanner;
+// import java.util.Scanner;
 import java.util.Arrays;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
@@ -15,20 +16,17 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
 
         // 1. 날짜 및 메뉴 입력 검증
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-        int date = scanner.nextInt();
+        String input = Console.readLine();
+        int date = Integer.parseInt(input);
         boolean isDateValid = DateValidator.validateDate(date);
         LocalDate orderDate = LocalDate.of(2023, 12, date);
 
-        // 개행 문자 소비
-        scanner.nextLine();
-
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1): ");
-        String orderInput = scanner.nextLine();
+        String orderInput = Console.readLine();
 
         // 콤마(,)를 기준으로 문자열을 나누어 배열에 저장
         String[] orderItems = orderInput.split(",");
@@ -109,6 +107,5 @@ public class Application {
         } else {
             System.out.println("[ERROR] 입력이 유효하지 않습니다");
         }
-        scanner.close();
     }
 }
