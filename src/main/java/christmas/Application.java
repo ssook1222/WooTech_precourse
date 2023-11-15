@@ -1,11 +1,19 @@
 package christmas;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class Application {
+
+    // double 값을 통화 형식으로 포맷팅하는 메소드
+    private static String formatCurrency(double value) {
+        DecimalFormat currencyFormat = new DecimalFormat("#,###");
+        return currencyFormat.format(value);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
@@ -73,7 +81,7 @@ public class Application {
 
             // 7. 결과 출력
             System.out.println("<할인 전 총주문 금액>");
-            System.out.println(totalPrice + "원\n");
+            System.out.println(formatCurrency(totalPrice) + "원\n");
 
             if (!freeItem.isEmpty()) {
                 System.out.println("<증정 메뉴>");
@@ -85,11 +93,11 @@ public class Application {
 
             if (discount > 0) {
                 System.out.println("<총할인 금액>");
-                System.out.println("-" + discount + "원\n");
+                System.out.println("-" + formatCurrency(discount) + "원\n");
             }
 
             System.out.println("<할인 후 예상 결제 금액>");
-            System.out.println(finalPrice + "원\n");
+            System.out.println(formatCurrency(finalPrice) + "원\n");
 
             if (!eventBadge.isEmpty()) {
                 System.out.println("<12월 이벤트 배지>");
